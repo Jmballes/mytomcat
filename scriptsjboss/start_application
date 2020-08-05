@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+
+JBOSS_HOME='/opt/jws-5.0/tomcat'
+DEPLOY_TO_ROOT='false'
+CONTEXT_PATH='mytomcat'
+SERVER_HTTP_PORT='80'
+
+TEMP_STAGING_DIR='/tmp/codedeploy-deployment-staging-area'
+WAR_STAGED_LOCATION="$TEMP_STAGING_DIR/mytomcat.war"
+
+
+# Remove unpacked application artifacts
+if [[ -f $JBOSS_HOME/webapps/$CONTEXT_PATH.war ]]; then
+    rm $JBOSS_HOME/webapps/$CONTEXT_PATH.war
+fi
+if [[ -d $JBOSS_HOME/webapps/$CONTEXT_PATH ]]; then
+    rm -rfv $JBOSS_HOME/webapps/$CONTEXT_PATH
+fi
+
+# Copy the WAR file to the webapps directory
+cp $WAR_STAGED_LOCATION $JBOSS_HOME/webapps/$CONTEXT_PATH.war
+
+
+sudo systemctl start jws5-tomcat.service

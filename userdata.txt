@@ -1,0 +1,33 @@
+#!/bin/bash
+sudo bash -c 'echo "export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.232.b09-0.el7_7.x86_64" > /opt/jws-5.0/tomcat/bin/setenv.sh'
+cd /opt/jws-5.0/tomcat/bin/
+sudo chmod 0777 ​setenv.sh 
+cd /opt/jws-5.0/tomcat/
+sudo su
+./.postinstall.systemd
+cd ..
+chown -R tomcat:tomcat tomcat/
+systemctl enable jws5-tomcat.service 
+systemctl start jws5-tomcat.service
+
+cd /home/ec2-user/
+
+curl -O https://bootstrap.pypa.io/get-pip.py
+python get-pip.py 
+export PATH=~/.local/bin:$PATH
+pip install awscli --upgrade 
+aws --version
+chmod 0777 /opt/jws-5.0/tomcat/webapps
+cd /home/ec2-user
+sudo yum install wget -y
+sudo yum install ruby -y
+wget https://aws-codedeploy-eu-central-1.s3.amazonaws.com/latest/install
+chmod +x ./install
+sudo ./install auto
+sudo service codedeploy-agent start
+
+curl http://169.254.169.254/latest/meta-data/iam/info
+cd /opt/jws-5.0/tomcat/webapps
+sudo aws s3 cp s3://jmbbucketcodepipeline/mytomcat-0.0.1-SNAPSHOT.war /opt/jws-5.0/tomcat/webapps/mytomcat.war
+sudo systemctl stop jws5-tomcat.service
+sudo systemctl start jws5-tomcat.service
