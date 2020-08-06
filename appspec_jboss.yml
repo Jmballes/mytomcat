@@ -1,0 +1,17 @@
+version: 0.0
+os: linux
+files:
+  - source: /target/mytomcat.war
+    destination: /tmp/codedeploy-deployment-staging-area/
+hooks:
+  ApplicationStop:
+    - location: scriptsjboss/stop_application
+      timeout: 300
+#  BeforeInstall:
+#    - location: scriptsjboss/install_dependencies
+#      timeout: 300
+  ApplicationStart:
+    - location: scriptsjboss/start_application
+      timeout: 300
+# ValidateService:
+#   - location: scriptsjboss/basic_health_check.sh

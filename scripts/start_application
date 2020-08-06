@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+echo 'prueba' > /home/ec2-user/start_application.txt
 
 CATALINA_HOME='/usr/share/tomcat7'
 DEPLOY_TO_ROOT='false'
