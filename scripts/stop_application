@@ -1,7 +1,13 @@
 #!/bin/bash
 
-echo 'prueba' > /home/ec2-user/stop_application.txt
-set -e
 
+varhostname="$(curl http://169.254.169.254/latest/meta-data/hostname)"
+varipv4="$(curl curl http://169.254.169.254/latest/meta-data/public-ipv4)"
+vardate=$(date +"%d/%m/%Y %H:%M:%S")
+mkdir /properties
+
+echo hostname=$varhostname >> /properties/deploy.properties
+echo ipv4=$varipv4 >> /properties/deploy.properties
+echo deploydate=$vardate >> /properties/deploy.properties
 
 service tomcat7 stop
