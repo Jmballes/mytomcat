@@ -36,6 +36,9 @@ public class MyServlet extends HttpServlet {
 		out.println("<BODY> <H1> Hello World probando 4</H1>");
 		out.println("</BODY><HTML>");
 		
+		Utils c= new Utils();
+		
+		out.println(c.init());
 	}
 
 	/**
