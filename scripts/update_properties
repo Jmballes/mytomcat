@@ -4,23 +4,23 @@ varhostname="$(curl http://169.254.169.254/latest/meta-data/hostname)"
 varipv4="$(curl http://169.254.169.254/latest/meta-data/public-ipv4)"
 vardate=$(date +"%d/%m/%Y %H:%M:%S")
 
-grep ipv4 deploy.properties
+grep ipv4 /properties/deploy.properties
 if [ $? -eq 0 ]; then
-	sed -i '/ipv4/d' deploy.properties
+	sed -i '/ipv4/d' /properties/deploy.properties
 	
 fi
 
-grep hostname deploy.properties
+grep hostname /properties/deploy.properties
 if [ $? -eq 0 ]; then
 
-	sed -i '/hostname/d' deploy.properties
+	sed -i '/hostname/d' /properties/deploy.properties
 	
 fi
 
-grep deploydate deploy.properties
+grep deploydate /properties/deploy.properties
 if [ $? -eq 0 ]; then
 
-	sed -i '/deploydate/d' deploy.properties
+	sed -i '/deploydate/d' /properties/deploy.properties
 	
 fi
 
