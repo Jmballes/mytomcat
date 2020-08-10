@@ -96,8 +96,8 @@ public class Utils {
 					int indexpropertie = line.indexOf('=', indexdate + 1);
 
 					date = line.substring(0, indexdate);
-					propertie = line.substring(indexdate, indexpropertie);
-					value = line.substring(indexpropertie);
+					propertie = line.substring(indexdate+1, indexpropertie);
+					value = line.substring(indexpropertie+1);
 				} catch (Exception e) {
 					if (date != null) {
 						date="error";
