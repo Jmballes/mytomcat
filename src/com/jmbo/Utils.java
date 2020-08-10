@@ -56,7 +56,7 @@ public class Utils {
 //			htb.addRowValues("ipv4", ipv4);
 //			htb.addRowValues("deploydate", deploydate);
 			String table = ch(file);
-			return  table;
+			return table;
 		} catch (IOException ex) {
 			logger.info("error cargando fichero properties: " + ex.getMessage());
 			ex.printStackTrace();
@@ -65,7 +65,7 @@ public class Utils {
 	}
 
 	private String ch(File initialFile) {
-		String table=null;
+		String table = null;
 		try {
 			InputStream targetStream = new FileInputStream(initialFile);
 			table = readFromInputStream(targetStream);
@@ -88,11 +88,27 @@ public class Utils {
 			String line;
 			while ((line = br.readLine()) != null) {
 //			            resultStringBuilder.append(line).append("\n");
-				int indexdate = line.indexOf('=');
-				int indexpropertie = line.indexOf('=', indexdate+1);
-				String date = line.substring(0, indexdate);
-				String propertie = line.substring(indexdate, indexpropertie);
-				String value = line.substring(indexpropertie);
+				String date=null;
+				String propertie=null;
+				String value=null;
+				try {
+					int indexdate = line.indexOf('=');
+					int indexpropertie = line.indexOf('=', indexdate + 1);
+
+					date = line.substring(0, indexdate);
+					propertie = line.substring(indexdate, indexpropertie);
+					value = line.substring(indexpropertie);
+				} catch (Exception e) {
+					if (date != null) {
+						date="error";
+					}
+					if (propertie != null) {
+						propertie="error";
+					}
+					if (value != null) {
+						value="error";
+					}
+				}
 				if (deploydate == null) {
 
 					deploydate = date;
@@ -100,7 +116,7 @@ public class Utils {
 					resultStringBuilder.append(date);
 					resultStringBuilder.append("</b>");
 					resultStringBuilder.append(HtmlTableBuilder.TABLE_START_BORDER);
-				}else if (!deploydate.equals(date)) {
+				} else if (!deploydate.equals(date)) {
 					resultStringBuilder.append(HtmlTableBuilder.TABLE_END);
 					resultStringBuilder.append("<b>");
 					resultStringBuilder.append(date);
@@ -136,10 +152,11 @@ public class Utils {
 		}
 		return null;
 	}
-	
+
 	public static String getDetailOs() {
 		return System.getProperty("os.name").toLowerCase();
 	}
+
 	// Simple log utility
 	private static void getTablePropertiesHTML(String string) {
 
