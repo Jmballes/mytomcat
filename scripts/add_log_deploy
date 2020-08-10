@@ -2,7 +2,7 @@
 
 varhostname="$(curl http://169.254.169.254/latest/meta-data/hostname)"
 varipv4="$(curl http://169.254.169.254/latest/meta-data/public-ipv4)"
-vardate=$(date +"%d/%m/%Y %H:%M:%S")
+vardate=$(date +"%d/%m/%Y %H:%M:%S:%N")
 
 
 
