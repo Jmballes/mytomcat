@@ -33,7 +33,7 @@ public class MyServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println("<HTML>");
 		out.println("<HEAD><TITLE> </TITLE></HEAD>");
-		out.println("<BODY> <H1> mytomcat/MyServlet 1.0.2</H1>");
+		out.println("<BODY> <H1> mytomcat/MyServlet 1.0.3</H1>");
 		out.println("<h2>CodeDeploy log:</h2></br>");
 		
 		Utils c= new Utils();
