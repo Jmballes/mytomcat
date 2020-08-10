@@ -19,7 +19,7 @@ hooks:
     - location: scripts/write_codedeploy_config.sh
     - location: scripts/start_application
       timeout: 300
-  ValidateServie:
+  ValidateService:
     - location: scripts/wait_1_minute
       timeout: 
 # ValidateService:
