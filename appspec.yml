@@ -10,7 +10,7 @@ hooks:
     - location: scripts/stop_application
       timeout: 300
   BeforeInstall:
-    - location: scripts/update_properties
+    - location: scripts/add_log_deploy
       timeout: 300
 #  BeforeInstall:
 #    - location: scripts/install_dependencies
